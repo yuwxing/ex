@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Do You Like Animals?</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .question { margin: 10px 0; }
+        .animal-box { display: flex; flex-wrap: wrap; gap: 10px; }
+        .animal-option { cursor: pointer; padding: 5px 10px; background-color: lightgray; border-radius: 5px; }
+        .image-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .image-box { text-align: center; }
+        .hidden { display: none; }
+    </style>
+    <script>
+        function checkAnswers() {
+            let answers = ["lion", "penguin", "tiger", "eagle", "wolf", "monkey", "fox", "giraffe"];
+            let correct = true;
+            for (let i = 0; i < answers.length; i++) {
+                let input = document.getElementById("answer" + i).value.toLowerCase();
+                if (input !== answers[i]) {
+                    correct = false;
+                }
+            }
+            alert(correct ? "All answers are correct!" : "Some answers are incorrect. Try again!");
+        }
+
+        function checkTrueFalse() {
+            let correctAnswers = ["F", "T", "T", "F"];
+            let correct = true;
+            for (let i = 0; i < correctAnswers.length; i++) {
+                let selected = document.querySelector(`input[name="tf${i}"]:checked`);
+                if (!selected || selected.value !== correctAnswers[i]) {
+                    correct = false;
+                }
+            }
+            alert(correct ? "All answers are correct!" : "Some answers are incorrect. Try again!");
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Why do you like animals?</h2>
+    
+    <h3>1a. Write the animal names under the pictures.</h3>
+    <div class="animal-box">
+        <span class="animal-option">fox</span>
+        <span class="animal-option">lion</span>
+        <span class="animal-option">tiger</span>
+        <span class="animal-option">giraffe</span>
+        <span class="animal-option">monkey</span>
+        <span class="animal-option">eagle</span>
+        <span class="animal-option">wolf</span>
+        <span class="animal-option">penguin</span>
+    </div>
+
+    <div class="image-container">
+        <div class="image-box">
+            <p>Image A: <input type="text" id="answer0"></p>
+        </div>
+        <div class="image-box">
+            <p>Image B: <input type="text" id="answer1"></p>
+        </div>
+        <div class="image-box">
+            <p>Image C: <input type="text" id="answer2"></p>
+        </div>
+        <div class="image-box">
+            <p>Image D: <input type="text" id="answer3"></p>
+        </div>
+        <div class="image-box">
+            <p>Image E: <input type="text" id="answer4"></p>
+        </div>
+        <div class="image-box">
+            <p>Image F: <input type="text" id="answer5"></p>
+        </div>
+        <div class="image-box">
+            <p>Image G: <input type="text" id="answer6"></p>
+        </div>
+        <div class="image-box">
+            <p>Image H: <input type="text" id="answer7"></p>
+        </div>
+    </div>
+    <button onclick="checkAnswers()">Check Answers</button>
+
+    <h3>1b. Listen to the teacher’s instructions. Answer the questions.</h3>
+    <ol>
+        <li>Where are the students? <input type="text"></li>
+        <li>Why are they there? <input type="text"></li>
+        <li>When should they be back? <input type="text"></li>
+    </ol>
+
+    <h3>1c. Listen to the conversation. Circle T for true or F for false.</h3>
+    <p class="question">1. All three students like monkeys. <label><input type="radio" name="tf0" value="T"> T</label> <label><input type="radio" name="tf0" value="F"> F</label></p>
+    <p class="question">2. Yaming doesn’t like wolves. <label><input type="radio" name="tf1" value="T"> T</label> <label><input type="radio" name="tf1" value="F"> F</label></p>
+    <p class="question">3. Wolves take good care of their babies. <label><input type="radio" name="tf2" value="T"> T</label> <label><input type="radio" name="tf2" value="F"> F</label></p>
+    <p class="question">4. The three students see the monkeys before the wolves. <label><input type="radio" name="tf3" value="T"> T</label> <label><input type="radio" name="tf3" value="F"> F</label></p>
+    <button onclick="checkTrueFalse()">Check True/False</button>
+
+    <h3>Talk about your favorite animal.</h3>
+    <p>What’s your favorite animal? <input type="text"></p>
+    <p>Why do you like it? <input type="text"></p>
+
+</body>
+</html>
