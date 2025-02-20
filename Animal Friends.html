@@ -1,72 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Animal Friends 动态课件</title>
-<style>
-body {
-  font-family: sans-serif;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px;
-}
-.section {
-  margin-bottom: 20px;
-  text-align: center;
-}
-.image {
-  max-width: 400px;
-  height: auto;
-  margin-top: 10px;
-}
-.question {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.answer {
-  margin-bottom: 10px;
-}
-.activity {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-</style>
+    <title>Animal Friends (AI+MR)</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script>
+        // 初始化AR场景
+        AFRAME.registerComponent('ar-scene', {
+            init: function () {
+                // 创建AR会话
+                navigator.xr.requestSession('immersive-ar').then(session => {
+                    // 设置场景
+                    this.el.setAttribute('ar', '');
+                    this.el.setAttribute('renderer', 'antialias: true;');
+
+                    // 添加虚拟动物
+                    let animal = document.createElement('a-entity');
+                    animal.setAttribute('gltf-model', '#animal-model');
+                    this.el.appendChild(animal);
+
+                    // 添加AI交互
+                    // ...
+                });
+            }
+        });
+    </script>
 </head>
 <body>
-<div class="container">
-  <h1>Animal Friends</h1>
-
-  <div class="section">
-    <h2>Section A: Why do you like animals?</h2>
-    <img class="image" src="animal_image_1.jpg" alt="Animal 1">
-    <div class="question">Why do you like this animal?</div>
-    <div class="answer">I like it because it is cute and friendly.</div>
-  </div>
-
-  <div class="section">
-    <h2>Section B: How are animals part of our lives?</h2>
-    <img class="image" src="animal_image_2.jpg" alt="Animal 2">
-    <div class="question">How does this animal help us?</div>
-    <div class="answer">It provides us with food and companionship.</div>
-  </div>
-
-  <div class="section">
-    <h2>Project: Design a zoo</h2>
-    <div class="activity">
-      <h3>Activity:</h3>
-      <p>Imagine you are designing a zoo. What animals would you include? Draw a plan of your zoo and label the different animal enclosures.</p>
-      <img class="image" src="zoo_plan.jpg" alt="Zoo Plan">
-    </div>
-  </div>
-</div>
-
-<script>
-// JavaScript 代码可以添加动态效果，例如图片轮播、问题互动等
-</script>
-
+    <a-scene ar-scene>
+        <a-assets>
+            <a-asset-item id="animal-model" src="animal.glb"></a-asset-item>
+        </a-assets>
+    </a-scene>
 </body>
 </html>
