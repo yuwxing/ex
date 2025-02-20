@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哪吒规则冒险 - 交互式学习课件</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #e0f7fa; /* 浅蓝色背景，提升可读性 */
+            color: #000000; /* 黑色字体，与背景对比 */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            background-color: #ffffff; /* 白色背景，清晰可见 */
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .scene {
+            background: linear-gradient(#b2ebf2, #80deea); /* 明亮渐变背景 */
+            border: 2px dashed #f44336; /* 红色虚线，突出哪吒主题 */
+            padding: 10px;
+            margin: 10px 0;
+            position: relative;
+        }
+        .dialog {
+            background-color: #fff3e0; /* 橙黄色背景，温暖对话 */
+            color: #000000; /* 黑色字体 */
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .bulletin {
+            color: #f44336; /* 红色，突出哪吒火轮 */
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .interactive {
+            color: #0288d1; /* 蓝色，吸引注意 */
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .vocab-list, .rule-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .vocab-item, .rule-card {
+            background-color: #f44336; /* 哪吒红色 */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .vocab-item:hover, .rule-card:hover {
+            background-color: #d32f2f; /* 深红，交互反馈 */
+        }
+        .checkbox {
+            margin-right: 10px;
+        }
+        .game-area {
+            background-color: #fff9c4; /* 淡黄色，游戏区域 */
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .bulletin-animation {
+            position: absolute;
+            top: 10px;
+            right: -50px;
+            font-size: 12px;
+            color: #ffeb3b; /* 黄色弹幕 */
+            animation: slide 3s infinite;
+        }
+        @keyframes slide {
+            0% { right: -50px; opacity: 0; }
+            50% { right: 10px; opacity: 1; }
+            100% { right: 100px; opacity: 0; }
+        }
+        .hidden { display: none; }
+        .drag-item {
+            background-color: #f44336;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: move;
+        }
+        .drop-zone {
+            background-color: #b2ebf2;
+            padding: 10px;
+            margin: 5px;
+            border: 2px dashed #f44336;
+            min-height: 50px;
+        }
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .puzzle-piece {
+            background-color: #4caf50;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .poster-area {
+            border: 2px dotted #f44336;
+            padding: 15px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>哪吒规则冒险 - 交互式学习课件</h1>
+        <p>欢迎进入哪吒学院！跟随哪吒与敖丙，破解规则挑战，掌握英语魔法，拯救学院！</p>
+
+        <!-- 情景导入 -->
+        <div class="section">
+            <h2>冒险开始：哪吒学院大门</h2>
+            <div class="scene">
+                <p>场景：哪吒学院大门，哪吒（火轮环绕）与敖丙（龙形闪现），背景有闪烁的“规则神珠”。</p>
+                <p class="bulletin">哪吒： "Ao Bing, welcome to Ne Zha Academy! But we must follow rules, or chaos will strike!"</p>
+                <p>敖丙： "Rules? Like—<span class="interactive" onclick="alert('Don’t use the Chaos Pearl in the Great Hall!')">Don’t use the Chaos Pearl in the Great Hall!</span>"</p>
+                <div class="audio">[🎧 插入音频：哪吒与敖丙的冒险对话，参考《哪吒2》场景]</div>
+                <p>点击规则神珠进入挑战吧！</p>
+                <div class="bulletin-animation">冒险开启！</div>
+            </div>
+        </div>
+
+        <!-- 词汇学习：哪吒谜题（1a） -->
+        <div class="section">
+            <h2>哪吒谜题：解锁规则词汇</h2>
+            <div class="scene">
+                <p>哪吒学院有神秘规则！完成谜题学习词汇，点击火轮听发音，记录到混沌珠！</p>
+                <div class="puzzle-grid">
+                    <div class="puzzle-piece" onclick="revealRule('Don’t be late for class. Arrive on time.')">迟到禁令</div>
+                    <div class="puzzle-piece" onclick="revealRule('Don’t run in the hallways.')">走廊禁令</div>
+                    <div class="puzzle-piece" onclick="revealRule('Wear the school uniform.')">服装要求</div>
+                    <div class="puzzle-piece" onclick="revealRule('Don’t use your phone in class.')">设备禁令</div>
+                    <div class="puzzle-piece" onclick="revealRule('Don’t litter. Keep your school clean and tidy.')">清洁规则</div>
+                    <div class="puzzle-piece" onclick="revealRule('Be polite and treat everyone with respect.')">礼貌规则</div>
+                    <div class="puzzle-piece" onclick="revealRule('Put up your hand if you want to ask your teacher a question.')">提问规则</div>
+                </div>
+                <p id="revealedRules"></p>
+                <div class="vocab-list">
+                    <div class="vocab-item" onclick="playSound('dont-be-late.mp3')">Don’t be late</div>
+                    <div class="vocab-item" onclick="playSound('dont-run.mp3')">Don’t run</div>
+                    <div class="vocab-item" onclick="playSound('wear-uniform.mp3')">Wear uniform</div>
+                    <div class="vocab-item" onclick="playSound('dont-use-phone.mp3')">Don’t use phone</div>
+                    <div class="vocab-item" onclick="playSound('dont-litter.mp3')">Don’t litter</div>
+                    <div class="vocab-item" onclick="playSound('be-polite.mp3')">Be polite</div>
+                    <div class="vocab-item" onclick="playSound('put-hand.mp3')">Put up hand</div>
+                </div>
+                <p>小游戏：哪吒火轮挑战！拖拽一个规则到混沌珠！</p>
+                <div class="drag-item" draggable="true" ondragstart="drag(event)" id="dragRule">Don’t run in hallways</div>
+                <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" id="chaosPearl">
+                    <p>拖到混沌珠记录规则！</p>
+                </div>
+                <p>写作任务：用英语设计一条哪吒学院新规则，如“Don’t use fire rings in the library.”</p>
+                <div class="bulletin-animation">词汇魔法解锁！</div>
+            </div>
+        </div>
+
+        <!-- 对话练习：哪吒对话（1b） -->
+        <div class="section">
+            <h2>哪吒对话：与英雄互动</h2>
+            <div class="scene">
+                <p>与AI英雄哪吒对话，用英语练习学院规则！</p>
+                <div class="dialog">
+                    <p>哪吒： "Hey, new student! What’s your name?"</p>
+                    <input type="text" id="studentName" placeholder="输入你的名字">
+                    <button onclick="aiResponse()">施展火轮！</button>
+                    <p id="aiReply" class="hidden">敖丙： "I’m Ao Bing. It’s my first day. Are there many rules here?"</p>
+                    <p>继续对话：点击提问规则！</p>
+                    <button onclick="showRuleDialog()">问哪吒规则</button>
+                    <div id="ruleDialog" class="hidden dialog">
+                        <p>哪吒： "Can we use phones in class?"</p>
+                        <button onclick="userReply('No, we can’t. Don’t use your phone in class.')">No, we can’t.</button>
+                        <p id="aiFollowup" class="hidden">哪吒： "What about running in the hallway?"</p>
+                        <button onclick="userReply('No, we can’t. Don’t run in the hallways.')">No, we can’t.</button>
+                        <p id="aiFinal" class="hidden">敖丙： "Thanks, Ne Zha! You’re a rules master!"</p>
+                    </div>
+                    <p>更多英语对话范例（Listening & Speaking Practice）：</p>
+                    <ul>
+                        <li>Ne Zha: "Do you know the rule about littering?"</li>
+                        <li>Ao Bing: "Yes, I do. Don’t litter. We must keep the academy clean."</li>
+                        <li>Student: "Can I wear my own clothes?"</li>
+                        <li>Ne Zha: "No, you can’t. You have to wear the school uniform."</li>
+                        <li>Ne Zha: "What’s the rule about asking questions?"</li>
+                        <li>Ao Bing: "Put up your hand if you want to ask your teacher a question."</li>
+                    </ul>
+                </div>
+                <div class="audio">[🎧 插入音频：1b对话，哪吒与敖丙规则对话]</div>
+                <p>听力游戏：听录音，回答“Who can’t find their pencil box?”（答案：Tom，根据教材对话）</p>
+                <div class="bulletin-animation">对话火轮成功！</div>
+            </div>
+        </div>
+
+        <!-- 小游戏：哪吒任务（1c, 1d） -->
+        <div class="section">
+            <h2>哪吒任务：规则挑战</h2>
+            <div class="game-area">
+                <p>游戏 1：哪吒混沌战（1c）！拖拽规则完成英雄句子。</p>
+                <div id="dragArea">
+                    <div draggable="true" class="drag-item" id="action1">run</div>
+                    <div draggable="true" class="drag-item" id="action2">walk</div>
+                    <div draggable="true" class="drag-item" id="action3">wear her uniform</div>
+                    <div draggable="true" class="drag-item" id="action4">keep clean</div>
+                    <div draggable="true" class="drag-item" id="action5">use phone</div>
+                    <div draggable="true" class="drag-item" id="action6">be polite</div>
+                </div>
+                <div class="drop-zone" ondrop="dropSentence(event, 'zone1')" ondragover="allowDrop(event)">
+                    <p>Mary can’t ___ in the hallway. She has to ___ slowly.</p>
+                </div>
+                <div class="drop-zone" ondrop="dropSentence(event, 'zone2')" ondragover="allowDrop(event)">
+                    <p>Sally mustn’t ___ at school. She has to ___ her uniform.</p>
+                </div>
+                <div class="drop-zone" ondrop="dropSentence(event, 'zone3')" ondragover="allowDrop(event)">
+                    <p>Tony can’t ___. He must ___ to everyone.</p>
+                </div>
+                <p>游戏 2：哪吒龙战（1d）！听录音，点击火轮激活正确的规则。</p>
+                <div class="rule-list">
+                    <div class="rule-card" onclick="checkRule('Don’t run in the hallways')">Don’t run in hallways</div>
+                    <div class="rule-card" onclick="checkRule('Wear the school uniform')">Wear uniform</div>
+                    <div class="rule-card" onclick="checkRule('Don’t use your phone in class')">Don’t use phone in class</div>
+                </div>
+                <div class="audio">[🎧 插入音频：1d录音，识别规则]</div>
+                <p>角色扮演（1e）：与同学扮演哪吒与敖丙，用英语讨论“Can Mary run in the hallway?”</p>
+                <div class="dialog">
+                    <p>英语对话范例（Speaking Practice）：</p>
+                    <ul>
+                        <li>Ne Zha: "Can Mary run in the hallway?"</li>
+                        <li>Ao Bing: "No, she can’t. She has to walk slowly in the hallway."</li>
+                        <li>Student 1: "Can Tony use his phone in class?"</li>
+                        <li>Student 2: "No, he can’t. Don’t use your phone in class."</li>
+                        <li>Ne Zha: "What about littering? What’s the rule?"</li>
+                        <li>Ao Bing: "Don’t litter. We must keep the academy clean and tidy."</li>
+                    </ul>
+                </div>
+                <div class="bulletin-animation">哪吒挑战胜利！</div>
+            </div>
+        </div>
+
+        <!-- 发音练习（Pronunciation） -->
+        <div class="section">
+            <h2>哪吒音符：发音挑战</h2>
+            <div class="scene">
+                <p>听哪吒的混沌音符，重复单词，用火轮添加一个英语词到每组！</p>
+                <table>
+                    <tr>
+                        <th>/e/</th>
+                        <th>/ea/</th>
+                        <th>/ee/</th>
+                        <th>/ear/</th>
+                    </tr>
+                    <tr>
+                        <td>/e/ these</td>
+                        <td>/ea/ pet</td>
+                        <td>/ee/ speak</td>
+                        <td>/ear/ head</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="eInput" placeholder="添加/e/英语词"></td>
+                        <td><input type="text" id="eaInput" placeholder="添加/ea/英语词"></td>
+                        <td><input type="text" id="eeInput" placeholder="添加/ee/英语词"></td>
+                        <td><input type="text" id="earInput" placeholder="添加/ear/英语词"></td>
+                    </tr>
+                </table>
+                <button onclick="checkPronunciation()">施展火轮！</button>
+                <p id="pronunciationFeedback"></p>
+                <div class="audio">[🎧 插入音频：/e/, /ea/, /ee/, /ear/发音]</div>
+                <div class="bulletin-animation">音符火轮成功！</div>
+            </div>
+        </div>
+
+        <!-- 拓展任务 -->
+        <div class="section">
+            <h2>哪吒任务：创建规则漫画</h2>
+            <div class="scene">
+                <p>成为哪吒学院的规则守护者！设计一张漫画，包含至少3条英语规则（如“Don’t run in hallways”）和一幅哪吒图标（火轮或混沌珠）。</p>
+                <div class="poster-area">
+                    <textarea id="comicInput" placeholder="输入你的规则漫画内容（用英语）..." rows="5" cols="50"></textarea>
+                    <button onclick="submitComic()">提交漫画</button>
+                    <p id="comicFeedback"></p>
+                </div>
+                <p>角色扮演：与同学扮演哪吒和敖丙，用英语讨论“What’s your favorite rule? Why?”</p>
+                <div class="dialog">
+                    <p>英语对话范例（Speaking & Writing Practice）：</p>
+                    <ul>
+                        <li>Ne Zha: "What’s your favorite rule, Ao Bing?"</li>
+                        <li>Ao Bing: "I like ‘Don’t litter’ because it keeps the academy clean."</li>
+                        <li>Student 1: "I like ‘Wear uniform’ for unity. What about you?"</li>
+                        <li>Student 2: "I prefer ‘Be polite’ because it helps us get along."</li>
+                        <li>Ne Zha: "Why do you think rules are important?"</li>
+                        <li>Ao Bing: "Rules keep us safe and make the academy orderly."</li>
+                    </ul>
+                </div>
+                <div class="bulletin-animation">规则守护者荣耀！</div>
+            </div>
+        </div>
+
+        <script>
+            // 模拟音频播放（需替换为真实音频路径）
+            function playSound(file) {
+                alert(`播放哪吒发音：${file}`);
+                // 实际使用：<audio controls><source src="${file}" type="audio/mpeg"></audio>
+            }
+
+            // 规则谜题
+            let revealedRules = [];
+            function revealRule(rule) {
+                if (!revealedRules.includes(rule)) {
+                    revealedRules.push(rule);
+                    document.getElementById('revealedRules').innerHTML += `<p>${rule}</p>`;
+                    alert(`哪吒揭秘：${rule}`);
+                }
+            }
+
+            // AI对话交互
+            function aiResponse() {
+                const name = document.getElementById('studentName').value;
+                if (name) {
+                    document.getElementById('aiReply').classList.remove('hidden');
+                }
+            }
+
+            function showRuleDialog() {
+                document.getElementById('ruleDialog').classList.remove('hidden');
+            }
+
+            function userReply(reply) {
+                alert(`你说：${reply}`);
+                const followup = document.getElementById('aiFollowup');
+                const final = document.getElementById('aiFinal');
+                if (!followup.classList.contains('hidden')) {
+                    followup.classList.add('hidden');
+                    final.classList.remove('hidden');
+                } else {
+                    followup.classList.remove('hidden');
+                }
+            }
+
+            // 拖拽游戏
+            function allowDrop(event) {
+                event.preventDefault();
+            }
+
+            function drag(event) {
+                event.dataTransfer.setData("text", event.target.id);
+            }
+
+            function drop(event) {
+                event.preventDefault();
+                const data = event.dataTransfer.getData("text");
+                event.target.appendChild(document.getElementById(data));
+                alert("哪吒规则记录成功！");
+            }
+
+            function dropSentence(event, zone) {
+                event.preventDefault();
+                const data = event.dataTransfer.getData("text");
+                const item = document.getElementById(data);
+                event.target.appendChild(item);
+                alert(`哪吒句子完成：${event.target.textContent}`);
+                checkSentenceCompletion(zone);
+            }
+
+            function checkSentenceCompletion(zone) {
+                const zones = ['zone1', 'zone2', 'zone3'];
+                let complete = true;
+                zones.forEach(z => {
+                    const dropZone = document.getElementById(`dropZone${z.slice(-1)}`);
+                    if (!dropZone.querySelector('.drag-item')) complete = false;
+                });
+                if (complete) {
+                    alert("恭喜！所有哪吒句子解锁！");
+                }
+            }
+
+            // 听力规则检查
+            function checkRule(rule) {
+                const correctRules = ['Don’t run in the hallways', 'Wear the school uniform', 'Don’t use your phone in class'];
+                if (correctRules.includes(rule)) {
+                    alert(`正确！${rule}激活哪吒火轮！`);
+                } else {
+                    alert("试试其他规则！火轮未响应...");
+                }
+            }
+
+            // 发音检查
+            function checkPronunciation() {
+                const e = document.getElementById('eInput').value.toLowerCase();
+                const ea = document.getElementById('eaInput').value.toLowerCase();
+                const ee = document.getElementById('eeInput').value.toLowerCase();
+                const ear = document.getElementById('earInput').value.toLowerCase();
+                let feedback = '';
+                if (e && ['these', 'pen', 'get'].some(w => e.includes(w))) feedback += 'Good /e/ word! ';
+                if (ea && ['pet', 'set', 'let'].some(w => ea.includes(w))) feedback += 'Good /ea/ word! ';
+                if (ee && ['speak', 'week', 'meet'].some(w => ee.includes(w))) feedback += 'Good /ee/ word! ';
+                if (ear && ['head', 'bread', 'dead'].some(w => ear.includes(w))) feedback += 'Good /ear/ word! ';
+                document.getElementById('pronunciationFeedback').innerHTML = feedback || 'Try again!';
+            }
+
+            // 漫画提交
+            function submitComic() {
+                const comic = document.getElementById('comicInput').value;
+                if (comic.includes('Don’t') || comic.includes('Wear') || comic.includes('Be')) {
+                    document.getElementById('comicFeedback').innerHTML = "<span class='bulletin'>太棒了！你的哪吒规则漫画很棒！</span>";
+                } else {
+                    document.getElementById('comicFeedback').innerHTML = "添加一条规则，如‘Don’t run in hallways’！";
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
